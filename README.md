@@ -4,3 +4,4 @@ Test task for Emphasoft
 + React Query
 + Tailwind
 + Material UI
++ React jsonschema form
