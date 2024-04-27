@@ -1,5 +1,5 @@
 import {RJSFSchema} from "@rjsf/utils";
-import {getFormFields} from "src/ui/tools";
+import {getFormFields} from "src/components/Form/tools";
 
 export const schema: RJSFSchema = {
     title: 'Авторизация',

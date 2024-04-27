@@ -1,10 +1,10 @@
 import React from 'react';
-import {Typography} from "@mui/material";
+import Text from "src/ui/Text";
 
 const Main = () => {
     return (
         <div>
-            <Typography textAlign={'center'} variant={'h4'}>Приложение для просмотра и редактирования пользователей</Typography>
+            <Text>Приложение для просмотра и редактирования пользователей</Text>
         </div>
     );
 };

@@ -5,15 +5,17 @@ import {DataGrid} from "@mui/x-data-grid";
 import {client} from "./api";
 import {ListActions} from "src/components/List/ListActions";
 import {columns} from "src/components/List/config";
-
+import Text from "src/ui/Text";
 
 const List = () => {
     const {isLoading, data} = useQuery('users', () => client.usersList());
     const ref = React.useRef();
 
-    if (isLoading) return <Typography textAlign={'center'} variant={'h4'}>
-        Загрузка...
-    </Typography>
+    if (isLoading) return <Text>Загрузка...</Text>
+
+    function onSelect(data) {
+        window.app.navigate('users/' + data.id);
+    }
 
     return (
         <div>
@@ -32,6 +34,7 @@ const List = () => {
                     pageSizeOptions={[10]}
                     checkboxSelection
                     disableRowSelectionOnClick
+                    onRowClick={onSelect}
                 />
             </Box>
             <div className={'h-[50px]'}></div>

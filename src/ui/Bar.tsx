@@ -9,7 +9,7 @@ function Bar({tabs}) {
     const location = useLocation();
     const [tab, setTab] = React.useState(0);
     useLayoutEffect(() => {
-        setTab(Object.keys(pages).indexOf(window.location.pathname.replace('/', '')));
+        setTab(Object.keys(pages).indexOf(window.location.pathname.replaceAll('/', '').replace('emphasoft','')));
     }, [location])
     let tabsNames = Object.values(tabs);
     return (
@@ -20,7 +20,10 @@ function Bar({tabs}) {
                           variant={'scrollable'}
                           indicatorColor="secondary"
                           textColor="inherit"
-                    >
+                          scrollButtons
+                          allowScrollButtonsMobile
+                          centered
+                        >
                         {
                             tabsNames.map((t, i) => <Tab onClick={() => {
                                 window.app.navigate(Object.keys(pages)[i])

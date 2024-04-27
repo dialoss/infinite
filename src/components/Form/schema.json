@@ -321,7 +321,10 @@
             "title": "Superuser status",
             "description": "Designates that this user has all permissions without explicitly assigning them."
           }
-        }
+        },
+        "required": [
+          "password"
+        ]
       },
       "User": {
         "type": "object",

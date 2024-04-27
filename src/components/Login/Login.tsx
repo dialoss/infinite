@@ -1,10 +1,10 @@
 import React from 'react';
-import Form from '@rjsf/mui';
-import validator from '@rjsf/validator-ajv8';
 import {Button, Typography} from "@mui/material";
 import {login} from "src/components/Login/api";
 import {useAuth} from "src/store/auth";
 import {schema} from "./config";
+import Text from "src/ui/Text";
+import CustomForm from "src/components/Form/CustomForm";
 
 const Login = ({callback}) => {
     const auth = useAuth(state => state.token);
@@ -23,18 +23,16 @@ const Login = ({callback}) => {
     return (
         <div>
             {auth ? <div className={'flex items-center gap-2 justify-center flex-col'}>
-                    <Typography textAlign={'center'} variant={'h5'}>Вы авторизованы</Typography>
+                    <Text>Вы авторизованы</Text>
                     <Button className={'mx-auto'} variant={'contained'} onClick={() =>
                         useAuth.setState(state => ({
                             token: ""
                         }))}>Выйти</Button>
                 </div> :
-                <Form
+                <CustomForm
                     schema={schema}
-                    validator={validator}
-                    onSubmit={submit}>
-                    <Button type={'submit'} variant={'contained'}>подтвердить</Button>
-                </Form>
+                    submit={submit}>
+                </CustomForm>
             }
         </div>
     );

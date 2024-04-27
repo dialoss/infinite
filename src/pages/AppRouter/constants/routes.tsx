@@ -1,6 +1,7 @@
 import Main from "../../Main";
 import LoginPage from "../../LoginPage";
 import Content from "../../Content";
+import UserPage from "src/pages/UserPage";
 
 export const pages = {
     'main': "Главная",
@@ -21,5 +22,10 @@ export const routes = [
         path: "/users/",
         auth: true,
         element: <Content/>
+    },
+    {
+        path: "/users/:id/",
+        auth: true,
+        element: <UserPage/>
     },
 ];

@@ -1,6 +1,6 @@
-import {getFormFields, normalizeName} from "src/ui/tools";
 import {RJSFSchema} from "@rjsf/utils";
-import defaultSchema from "src/schema.json"
+import defaultSchema from "src/components/Form/schema.json";
+import {getFormFields, normalizeName} from "src/components/Form/tools";
 
 export const config = {
     "isActive": {
@@ -39,6 +39,6 @@ for (const rawName in defaultSchema.components.schemas.User.properties) {
     columns.push({
         field: name,
         headerName: f.title,
-        width: 100,
+        width: window.innerWidth < 1000 ? 150 : 100,
     })
 }

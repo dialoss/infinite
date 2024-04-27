@@ -1,10 +1,10 @@
 import {Button, Stack} from "@mui/material";
-import {Form} from "@rjsf/mui";
-import {getFormFields} from "src/ui/tools";
 import {useMutation, useQueryClient} from "react-query";
 import {client} from "./api";
-import validator from '@rjsf/validator-ajv8';
 import {config, createSchema, editSchema} from "src/components/List/config";
+import CustomForm from "src/components/Form/CustomForm";
+import {getFormFields} from "src/components/Form/tools";
+import {getSelectedUsers} from "src/components/List/tools";
 
 
 export function ListActions({listRef}) {
@@ -28,11 +28,25 @@ export function ListActions({listRef}) {
 
     const actions = [
         {
+            name: 'Создать',
+            callback: () => {
+                window.app.openModal({
+                    content:
+                        <CustomForm
+                            schema={createSchema}
+                            submit={d => {
+                                window.app.closeModal();
+                                create.mutate(d.formData);
+                            }}></CustomForm>
+                })
+            }
+        },
+        {
             name: 'Удалить',
             callback: () => {
-                let users = listRef.current.getSelectedRows().values();
+                let users = getSelectedUsers(listRef);
                 if (!users.length) {
-                    window.app.alert({message:"Не выбраны пользователи", type:'error'});
+                    window.app.alert({message: "Не выбраны пользователи", type: 'error'});
                     return;
                 }
                 for (const user of users) {
@@ -40,48 +54,28 @@ export function ListActions({listRef}) {
                 }
             }
         },
+
         {
             name: 'Редактировать',
             callback: () => {
-                let user = [...listRef.current.getSelectedRows().values()].slice(-1)[0];
+                let user = getSelectedUsers(listRef).slice(-1)[0];
                 if (!user) {
                     window.app.alert({message: "Пользователь не выбран", type: 'error'});
                     return
                 }
                 window.app.openModal({
                     content:
-                        <Form
-                            schema={{...editSchema, ...getFormFields("PatchedUser", config, user)}}
-                            validator={validator}
-                            onSubmit={d => {
-                                window.app.closeModal();
-                                update.mutate({id: user.id, user: d.formData});
-                            }}
-                        > <Button type={'submit'} variant={'contained'}>подтвердить</Button>
-                        </Form>
-                })
-            }
-        },
-        {
-            name: 'Создать',
-            callback: () => {
-                window.app.openModal({
-                    content:
-                        <Form
-                            schema={createSchema}
-                            validator={validator}
-                            onSubmit={d => {
-                                window.app.closeModal();
-                                create.mutate(d.formData);
-                            }}
-                        > <Button type={'submit'} variant={'contained'}>подтвердить</Button>
-                        </Form>
+                        <CustomForm schema={{...editSchema, ...getFormFields("PatchedUser", config, user)}}
+                                    submit={d => {
+                                        window.app.closeModal();
+                                        update.mutate({id: user.id, user: d.formData});
+                                    }}></CustomForm>
                 })
             }
         },
     ];
     return (
-        <Stack flexDirection={'row'} gap={2} justifyContent={'center'}>{
+        <Stack flexWrap={'wrap'} flexDirection={'row'} gap={2} justifyContent={'center'}>{
             actions.map(action =>
                 <Button key={action.name} variant={'contained'} onClick={action.callback}>
                     {action.name}

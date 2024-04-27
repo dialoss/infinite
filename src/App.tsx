@@ -15,7 +15,7 @@ const App = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <Container>
-                <BrowserRouter>
+                <BrowserRouter basename={'emphasoft'}>
                     <Bar tabs={pages}></Bar>
                     <div className="h-[60px]"></div>
                     <AppRouter></AppRouter>
