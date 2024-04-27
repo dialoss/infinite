@@ -30,7 +30,12 @@ export function ListActions({listRef}) {
         {
             name: 'Удалить',
             callback: () => {
-                for (const user of listRef.current.getSelectedRows().values()) {
+                let users = listRef.current.getSelectedRows().values();
+                if (!users.length) {
+                    window.app.alert({message:"Не выбраны пользователи", type:'error'});
+                    return;
+                }
+                for (const user of users) {
                     remove.mutate(user.id);
                 }
             }
