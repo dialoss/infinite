@@ -15,7 +15,6 @@ function createRandomUser() {
 }
 
 export function getUsers(limit) {
-    console.log('GET USERS')
     return faker.helpers.multiple(createRandomUser, {
         count: limit,
     });
