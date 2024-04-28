@@ -3,25 +3,16 @@ import { QueryClientProvider} from 'react-query'
 import "./app.scss"
 import "./types";
 import Container from "./ui/Container";
-import Alerts from "./components/Alerts";
 import {Modal} from "./ui/Modal";
-import {AppRouter} from "./pages/AppRouter";
-import {BrowserRouter} from "react-router-dom";
 import {queryClient} from "src/api/client";
-import Bar from "src/ui/Bar";
-import {pages} from "src/pages/AppRouter/constants/routes";
+import Content from "src/pages/Content";
 
 const App = () => {
     return (
         <QueryClientProvider client={queryClient}>
             <Container>
-                <BrowserRouter basename={'emphasoft'}>
-                    <Bar tabs={pages}></Bar>
-                    <div className="h-[60px]"></div>
-                    <AppRouter></AppRouter>
-                </BrowserRouter>
+                <Content></Content>
             </Container>
-            <Alerts></Alerts>
             <Modal></Modal>
         </QueryClientProvider>
     );

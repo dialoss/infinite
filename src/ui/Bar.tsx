@@ -9,7 +9,7 @@ function Bar({tabs}) {
     const location = useLocation();
     const [tab, setTab] = React.useState(0);
     useLayoutEffect(() => {
-        setTab(Object.keys(pages).indexOf(window.location.pathname.replaceAll('/', '').replace('emphasoft','')));
+        setTab(Object.keys(pages).indexOf(window.location.pathname.replaceAll('/', '').replace('infinite','')));
     }, [location])
     let tabsNames = Object.values(tabs);
     return (

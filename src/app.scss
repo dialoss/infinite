@@ -13,3 +13,11 @@
 .MuiDataGrid-main {
     min-height: 300px;
 }
+
+.item.selected {
+    background-color: #dfdddd;
+}
+
+.item:hover {
+    cursor: pointer;
+}

@@ -1,9 +1,22 @@
-import {useAuth} from "src/store/auth";
-import {Configuration, ErrorContext, UsersApi} from "src/api";
-import {APIMiddleware} from "src/api/client";
+import {faker} from '@faker-js/faker';
 
-export const client = new UsersApi(new Configuration({
-    basePath: "https://test-assignment.emphasoft.com",
-    apiKey: () => "Token " + useAuth.getState().token,
-    middleware: [new APIMiddleware()]
-}));
+function createRandomUser() {
+    return {
+        userId: faker.string.uuid(),
+        username: faker.internet.userName(),
+        email: faker.internet.email(),
+        password: faker.internet.password(),
+        name: faker.person.firstName(),
+        surname: faker.person.middleName(),
+        jobTitle: faker.person.jobTitle(),
+        department: faker.person.jobType(),
+        avatar: faker.image.avatar(),
+    };
+}
+
+export function getUsers(limit) {
+    console.log('GET USERS')
+    return faker.helpers.multiple(createRandomUser, {
+        count: limit,
+    });
+}

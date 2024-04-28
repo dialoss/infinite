@@ -6,10 +6,10 @@ export const config = {
     "isActive": {
         title: "Активен", default: true,
     },
-    "firstName": {
+    "name": {
         title: "Имя"
     },
-    "lastName": {
+    "surname": {
         title: "Фамилия"
     },
     "password": {
@@ -17,6 +17,21 @@ export const config = {
     },
     "username": {
         title: "Логин",
+    },
+    "email": {
+        title: "Почта",
+    },
+    "department": {
+        title: "Департамент",
+    },
+    "jobTitle": {
+        title: "Название работы",
+    },
+    "birthdate": {
+        title: "Дата рождения",
+    },
+    "avatar": {
+        title:"Картинка"
     }
 };
 
